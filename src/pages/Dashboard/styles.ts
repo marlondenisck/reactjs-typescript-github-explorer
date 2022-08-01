@@ -2,6 +2,10 @@
 import styled, { css } from 'styled-components';
 import { shade } from 'polished';
 
+interface FormErrorProps {
+  hasError: boolean;
+}
+
 export const Title = styled.h1`
   font-size: 4.8rem;
   color: #3a3a3a;
@@ -14,7 +18,7 @@ export const Title = styled.h1`
   }
 `;
 
-export const Form = styled.form`
+export const Form = styled.form<FormErrorProps>`
   margin: 3rem auto;
   max-width: 70rem;
   display: flex;
@@ -31,8 +35,14 @@ export const Form = styled.form`
     border-radius: 5px 0 0 5px;
     font-size: 1.6rem;
     color: #3d3d3d;
-    border: 2px solid transparent;
-    border-right: 0;
+    border: 2px solid #ccc;
+    @media (min-width: 768px) {
+      border-right: 0;
+    }
+    @media (max-width: 768px) {
+      width: 100%;
+      padding: 2rem;
+    }
 
     &::placeholder {
       color: #a8a8b3;
@@ -91,13 +101,14 @@ export const Repositories = styled.div`
     display: flex;
     align-items: center;
     transition: box-shadow 0.2s;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 4px;
 
     & + a {
       margin-top: 1.6rem;
     }
 
     &:hover {
-      box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+      box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 4px;
     }
 
     @media (max-width: 320px) {
@@ -111,7 +122,7 @@ export const Repositories = styled.div`
     }
 
     div {
-      margin-left: 1.6rem;
+      margin: 0 1.6rem;
       flex: 1;
 
       strong {
@@ -131,7 +142,8 @@ export const Repositories = styled.div`
         text-align: center;
         margin: 1rem 0;
 
-        strong, p {
+        strong,
+        p {
           font-size: 1.6rem;
         }
       }
@@ -156,5 +168,5 @@ export const Repositories = styled.div`
 export const AlertError = styled.span`
   display: block;
   color: #c53030;
-  margin-top: 8px;
+  margin: 0 auto;
 `;

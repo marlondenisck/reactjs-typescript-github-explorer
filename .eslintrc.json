@@ -46,7 +46,12 @@
       "error"
     ],
     "react/react-in-jsx-scope": "off",
-    "prettier/prettier": "error"
+    "prettier/prettier": "error",
+    "@typescript-eslint/explicit-function-return": [
+      "error", {
+        "allowExpressions": true
+      }
+    ]
   },
   "settings": {
     "import/resolver": {
