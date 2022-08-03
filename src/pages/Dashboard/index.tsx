@@ -22,7 +22,14 @@ const Dashboard: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [inputValue, setInputValue] = useState('');
   const [inputError, setInputError] = useState('');
-  const [repositories, setRepositories] = useState<Repository[]>([]);
+  const [repositories, setRepositories] = useState<Repository[]>(() => {
+    const localStoraged = localStorage.getItem('@Githubexplorer:repositories');
+
+    if (localStoraged) {
+      return JSON.parse(localStoraged);
+    }
+    return [];
+  });
 
   async function handleAddRepository(
     event: FormEvent<HTMLFormElement>,
@@ -47,6 +54,13 @@ const Dashboard: React.FC = () => {
       setInputError('Repositório não encontrado.');
     }
   }
+
+  useEffect(() => {
+    localStorage.setItem(
+      '@Githubexplorer:repositories',
+      JSON.stringify(repositories),
+    );
+  }, [repositories]);
 
   return (
     <>
